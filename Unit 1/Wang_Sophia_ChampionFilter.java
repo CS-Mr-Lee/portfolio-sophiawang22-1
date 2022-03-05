@@ -10,43 +10,46 @@ import java.io.*;
 public class Wang_Sophia_ChampionFilter{
    public static void main (String[] args){
    
-     // variables
-     double highestHp = 0;
-     int indexHighestHp = 0;
-     int indexLowestArmor = 0;
-     double lowestArmor = 100; 
-     int lineNum = 0;
-     
-     //counters
-     int x=0;
-     int y=0;
-     int z=0;
-     
-     //finding line number
-     try {
-         File f = new File ("champions.json"); 
-         FileReader fr = new FileReader(f);
-         BufferedReader br = new BufferedReader(fr);
-         
-         //reading a line from the file while there are more lines to read
-         String line;         
-         while ((line = br.readLine()) != null) {
-            lineNum++;
-         }
+      // variables
+      double highestHp = 0;
+      int indexHighestHp = 0;
+      int indexLowestArmor = 0;
+      double lowestArmor = 100; 
+      int lineNum = 0;
       
-      br.close();
-      fr.close();
-      }catch (IOException e) {
-      System.out.println("Cannot read file");
+      //counters
+      int x=0;
+      int y=0;
+      int z=0;
+     
+      //finding line number
+      try {
+          File f = new File ("champions.json"); 
+          FileReader fr = new FileReader(f);
+          BufferedReader br = new BufferedReader(fr);
+          
+          //reading a line from the file while there are more lines to read
+          String line;         
+          while ((line = br.readLine()) != null) {
+             lineNum++;
+          }
+      
+          br.close();
+          fr.close();
+      }
+      catch (IOException e) {
+         System.out.println("Cannot read file");
       }
 
-     //initializing arrays for values
-     double [] armor = new double [lineNum/38]; // dividing by 38 bc each chaarcter has about 38 to 39 lines of stats (assuming 39 lines each may result in the array being shorter than it should be so i used 38)
-     double [] hp = new double [lineNum/38];
-     String [] names = new String [lineNum/38]; 
+      //initializing arrays for values
+      double [] armor = new double [lineNum/38]; // dividing by 38 bc each chaarcter has about 38 to 39 lines of stats (assuming 39 lines each may result in the array being shorter than it should be so i used 38)
+      double [] hp = new double [lineNum/38];
+      String [] names = new String [lineNum/38]; 
       
       try {
+         //reading from champions.json
          File f = new File ("champions.json"); 
+         //creating FileReader and BufferedReader
          FileReader fr = new FileReader(f);
          BufferedReader br = new BufferedReader(fr);
          
@@ -57,7 +60,7 @@ public class Wang_Sophia_ChampionFilter{
             //finding lines with certain words
             //name
             if (line.contains("\"name\"")) {
-               names[x] = line.substring(12,line.length()-1);
+               names[x] = line.substring(12,line.length()-1);//saves value in an array
                x++;
             } 
             //hp
@@ -73,8 +76,8 @@ public class Wang_Sophia_ChampionFilter{
             if (line.contains("\"armor\"")) {
                armor[z] = Double.parseDouble(line.substring(15,line.length()-1));
                if(armor[z] < lowestArmor){
-                  lowestArmor = armor [z];
-                  indexLowestArmor = z;
+                  lowestArmor = armor [z];//storing if its the lowest
+                  indexLowestArmor = z;//storing index of the lowest
                }
                z++;
             }                            
@@ -87,47 +90,27 @@ public class Wang_Sophia_ChampionFilter{
          System.out.println("Cannot read file");
       }
       
-      //writing too file
+      //writing to file
       try {
-      
-      File file = new File("MaxChampStats.txt");
-      FileWriter fileWriter = new FileWriter(file);
-      BufferedWriter output = new BufferedWriter(fileWriter);
-
-      // Writes the string to the file
-     // output.write(data);
-      //moves to the next line
-      //output.newLine();
-
-      //output can only write String data, so you may need to cast data into string
-      output.write("" + highestHp);
-      output.write(" " +  names[indexHighestHp]);
-      output.write("\n" + lowestArmor);
-      output.write(" " + names[indexLowestArmor]);
-
-
-      // Closes the writers
-      output.close();
-      fileWriter.close();
+         //will try to write to MaxChampStats.txt If it doesn't exist, it will create it
+         File file = new File("MaxChampStats.txt");
+         //creates fileWriter and BufferedWriter
+         FileWriter fileWriter = new FileWriter(file);
+         BufferedWriter output = new BufferedWriter(fileWriter);
+   
+         //output can only write String data, so cast data into string
+         output.write("" + highestHp);
+         output.write(" " +  names[indexHighestHp]);//printing from names array at the same index as the highest hp to find the name assiciated with that hp
+         output.write("\n" + lowestArmor);
+         output.write(" " + names[indexLowestArmor]);//printing from names array at the same index as the lowest armor to find the name assiciated with that armor
+   
+         // Closes the writers
+         output.close();
+         fileWriter.close();
       }
-    //if there is a problem with writing
+      //if there is a problem with writing
       catch (IOException e) {
-      System.out.println("Sorry, cannot write to that file.");
+         System.out.println("Sorry, cannot write to that file.");
       }
-      
-      
-      
-      
-      //output
-      System.out.println(highestHp);
-      System.out.println(names[indexHighestHp]);
-      System.out.println(lowestArmor);       
-      System.out.println(names[indexLowestArmor]);
-      System.out.println(names[1]);
-      System.out.println(names[2]);
-      System.out.println(names[3]);
-      System.out.println(names[4]);
-      System.out.println(names[5]);
-         
    }
 }

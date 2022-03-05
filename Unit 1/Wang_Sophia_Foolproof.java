@@ -18,31 +18,36 @@ public class Wang_Sophia_Foolproof {
       
       //as long as first letter of numorator isn't q or Q itll loop
       while (numorator.charAt(0) != 113 && numorator.charAt(0) != 81){
-         //numorator input
-         System.out.print("Enter a numorator: ");
-         numorator = in.next();
          
-         //will only ask for demoninator if first letter of numorator isn't q or Q
-         if (numorator.charAt(0) != 113 && numorator.charAt(0) != 81){ 
-            System.out.print("Enter a divisor: ");
-            denominator = in.next();
-            try{
-               //casting inputs into integers to calculate with
-               int intNumorator = Integer.parseInt(numorator);
-               int intDenominator = Integer.parseInt(denominator);
-               if (intDenominator != 0){
-                  System.out.println((double)intNumorator/intDenominator);
-               }
-               //cant divide by 0
-               if (intDenominator == 0){
-                  System.out.println("you cant divide by 0");
-               }
+         try{
+            //numorator input
+            System.out.print("Enter a numorator: ");
+            numorator = in.next();
+            double doubNumorator = Double.parseDouble(numorator);//turns into a double so we can use it for calculations
+            
+            //will only ask for demoninator if first letter of numorator isn't q or Q
+            if (numorator.charAt(0) != 113 && numorator.charAt(0) != 81){ 
+               System.out.print("Enter a divisor: ");
+               denominator = in.next();
             }
-            //if they entered a different data type
-            catch (NumberFormatException e){
+            //casting string inputs into doubles to calculate with
+            
+            double doubDenominator = Double.parseDouble(denominator);
+            if (doubDenominator != 0){
+               System.out.println(doubNumorator/doubDenominator);
+            }
+            //cant divide by 0
+            if (doubDenominator == 0){
+               System.out.println("you cant divide by 0");
+            }
+         }
+         //if they entered a different data type
+         catch (NumberFormatException e){
+            if (numorator.charAt(0) != 113 && numorator.charAt(0) != 81){//will only print this message if the first letter of numorator isnt q or Q
                System.out.println("Bad data, please try again");
             }
          }
+         
       }   
    }
 }

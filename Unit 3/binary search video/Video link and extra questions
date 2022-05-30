@@ -1,0 +1,11 @@
+https://drive.google.com/file/d/15FOcJcLlQ-MdxJ-7ry5H4aWdyq0nzyu0/view?usp=sharing 
+
+Extra Questions!!
+
+True or False: Checking each value in an array till you reach the element of interest is more efficient than applying binary search
+
+In the video, how was the follwing situation handled: Sum of highest and lowest index divided by 2 resulted in a decimal number.
+    a) avgerage the elements of two index values above and below the calculated number (ex. calculated 6.5 means you average elements of index 6 and 7)
+    b) round the value up to the nearest whole number
+    c) round the value down to the nearest whole number
+    d) None of the above
